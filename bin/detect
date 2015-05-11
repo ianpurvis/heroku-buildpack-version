@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# bin/detect <build-dir>
+
+if [[ -v SOURCE_VERSION ]]; then
+  echo "VERSION" && exit 0
+else
+  echo "No SOURCE_VERSION detected" && exit 1
+fi

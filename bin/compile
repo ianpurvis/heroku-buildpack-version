@@ -1,0 +1,14 @@
+#!/bin/sh
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+echo "-----> Creating configuration script for VERSION environment variable"
+
+mkdir -p ~/.profile.d
+cat << EOF > ~/.profile.d/version.sh
+# default VERSION to build source version
+export VERSION=\${VERSION:$SOURCE_VERSION}
+EOF
+
