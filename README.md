@@ -15,16 +15,16 @@ So, let's capture the information during slug compilation. Heroku provides the S
 
 ## Usage
 
-The buildpack uses SOURCE_VERSION to compile a [~/.profile.d](https://devcenter.heroku.com/articles/buildpack-api#default-config-values) script for your app environment. For example, if your HEAD commit is 2745779, the resulting script will be:
+The buildpack uses SOURCE_VERSION to compile a [profile.d](https://devcenter.heroku.com/articles/profiled) script for your app environment. For example, if your HEAD commit is 2745779, the resulting script will be:
 
-	~/.profile.d/version.sh
-
+	.profile.d/version.sh
+	
 	# default VERSION to build source version
 	export VERSION=\${VERSION:2745779}
 
 The expansion syntax ensures that any existing value is not overidden. For better integration with other mechanisms that might control version, the runtime variable is named VERSION rather than SOURCE_VERSION.
 
-Within your app code, you can now easily get your source version from the environment. For easy portablity between Heroku and your dev environment, you can even cascade the initialization:
+Within your app code, you can now get the build source version from the environment. For easy portablity between Heroku and your dev environment, you can even cascade the initialization:
 
 	version = ENV['VERSION'] || `git rev-parse --short HEAD`.presence || '1.0'
 
