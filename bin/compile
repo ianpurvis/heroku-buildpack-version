@@ -1,20 +1,25 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
-indent() {
+echo_header() {
+  sed -u 's/^/-----> /'
+}
+echo_indented() {
   sed -u 's/^/       /'
 }
 
 output_dir=$1/.profile.d
 output_path=$output_dir/version.sh
 
-echo "-----> Creating profile.d script"
-echo "-----> Using source version $SOURCE_VERSION"
+echo_header "Creating profile.d script"
+
+short_version=`echo $SOURCE_VERSION | cut -c -7` 
+echo_indented "Using short version $short_version"
 
 mkdir -p $output_dir
 cat << EOF > $output_path
 # default VERSION to build source version
-export VERSION=\${VERSION:-$SOURCE_VERSION}
+export VERSION=\${VERSION:-$short_version}
 EOF
 
-echo "-----> Installed to $output_path"
+echo_indented "Script installed to $output_path"
