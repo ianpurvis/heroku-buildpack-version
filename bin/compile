@@ -2,13 +2,13 @@
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
 echo_header() {
-  sed -u 's/^/-----> /'
+  echo "-----> $1"
 }
 echo_indented() {
-  sed -u 's/^/       /'
+  echo "       $1"
 }
 
-output_dir=$1/.profile.d
+output_dir=.profile.d
 output_path=$output_dir/version.sh
 
 echo_header "Creating profile.d script"
@@ -16,8 +16,8 @@ echo_header "Creating profile.d script"
 short_version=${SOURCE_VERSION:0:7} 
 echo_indented "Using short version $short_version"
 
-mkdir -p $output_dir
-cat << EOF > $output_path
+mkdir -p $1/$output_dir
+cat << EOF > $1/$output_path
 # default VERSION to build source version
 export VERSION=\${VERSION:-$short_version}
 EOF
