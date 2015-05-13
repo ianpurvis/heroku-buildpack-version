@@ -13,7 +13,7 @@ output_path=$output_dir/version.sh
 
 echo_header "Creating profile.d script"
 
-short_version=`echo $SOURCE_VERSION | cut -c -7` 
+short_version=${SOURCE_VERSION:0:7} 
 echo_indented "Using short version $short_version"
 
 mkdir -p $output_dir
