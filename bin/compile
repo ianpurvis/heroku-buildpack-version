@@ -4,12 +4,16 @@ indent() {
   sed -u 's/^/       /'
 }
 
-echo "-----> Creating configuration script for VERSION environment variable"
-
 output_dir=$1/.profile.d
+output_path=$output_dir/version.sh
+
+echo "-----> Creating profile.d script"
+echo "-----> Using source version $SOURCE_VERSION"
+
 mkdir -p $output_dir
-cat << EOF > $output_dir/version.sh
+cat << EOF > $output_path
 # default VERSION to build source version
 export VERSION=\${VERSION:-$SOURCE_VERSION}
 EOF
 
+echo "-----> Installed to $output_path"
