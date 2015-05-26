@@ -1,4 +1,4 @@
-Version Buildpack
+Source Version Buildpack
 ==================
 
 As a developer,  
@@ -11,22 +11,26 @@ When you push your source to Heroku, the repo is used for slug compilation and t
 
 	version = `git rev-parse --short HEAD`
 
-So, let's capture the information during slug compilation. Heroku provides the SOURCE_VERSION environment variable as a nice SCM-agnostic way to do this.
+So, let's capture the information during slug compilation. Heroku provides the SOURCE_VERSION environment variable as a nice SCM-agnostic way to do this. We can use a buildpack to create a [profile.d](https://devcenter.heroku.com/articles/profiled) script that will export SOURCE_VERSION into the app runtime environment.
 
 ## Usage
 
-The buildpack uses SOURCE_VERSION to compile a [profile.d](https://devcenter.heroku.com/articles/profiled) script for your app environment. For example, if your HEAD commit is 2745779, the resulting script will be:
+Install the buildpack to your app:
 
-	.profile.d/version.sh
+	$ heroku buildpacks:add https://github.com/ianpurvis/heroku-buildpack-version
+
+If SOURCE_VERSION is f5efc0615dbd0f64f718e142bad858b8e1cf59bb, the buildpack will generate the following script:
+
+	~/.profile.d/source_version.sh
 	
-	# default VERSION to build source version
-	export VERSION=\${VERSION:2745779}
+	# default SOURCE_VERSION to build source version
+	export SOURCE_VERSION=\${SOURCE_VERSION:-f5efc0615dbd0f64f718e142bad858b8e1cf59bb}
 
-The expansion syntax ensures that any existing value is not overidden. For better integration with other mechanisms that might control version, the runtime variable is named VERSION rather than SOURCE_VERSION.
+Note the expansion syntax ensures that any existing value is not overidden.
 
-Within your app code, you can now get the build source version from the environment. For easy portablity between Heroku and your dev environment, you can even cascade the initialization:
+In dev environments, scripting `git rev-parse` is still probably the most convenient way to get your current source version. For easy portablity, you can cascade the initialization:
 
-	version = ENV['VERSION'] || `git rev-parse --short HEAD`.presence || '1.0'
+	version = ENV['SOURCE_VERSION'] || `git rev-parse --short HEAD`.presence || '1.0'
 
 ## Links
 

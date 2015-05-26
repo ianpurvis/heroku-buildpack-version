@@ -9,7 +9,7 @@ echo_indented() {
 }
 
 output_dir=.profile.d
-output_path=$output_dir/version.sh
+output_path=$output_dir/source_version.sh
 
 echo_header "Creating profile.d script"
 
@@ -18,8 +18,8 @@ echo_indented "Using short version $short_version"
 
 mkdir -p $1/$output_dir
 cat << EOF > $1/$output_path
-# default VERSION to build source version
-export VERSION=\${VERSION:-$short_version}
+# default SOURCE_VERSION to build source version
+export SOURCE_VERSION=\${SOURCE_VERSION:-$short_version}
 EOF
 
 echo_indented "Script installed to $output_path"
