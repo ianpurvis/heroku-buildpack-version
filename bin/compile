@@ -12,7 +12,7 @@ output_dir=.profile.d
 output_path=$output_dir/source_version.sh
 
 echo_header "Creating profile.d script"
-echo_indented "SOURCE_VERSION=$SOURCE_VERSION"
+echo_indented "SOURCE_VERSION: $SOURCE_VERSION"
 
 mkdir -p $1/$output_dir
 cat << EOF > $1/$output_path

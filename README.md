@@ -19,7 +19,15 @@ First thing, add the buildpack to your app:
 
 	$ heroku buildpacks:add https://github.com/ianpurvis/heroku-buildpack-version
 
-During your next deployment, the buildpack will generate the environment configuration script at `BUILD_DIR/.profile.d/source_version.sh`. The script is simple, just a single export statement with default expansion: 
+During your next deployment, the buildpack will generate the environment configuration script:
+
+	-----> Fetching custom git buildpack... done
+	-----> Source app detected
+	-----> Creating profile.d script
+	       SOURCE_VERSION: d9f63da90bc76ee878a0e9a54d9e85db7da4a52b
+	       Script installed to .profile.d/source_version.sh
+
+The script itself is simple, just a single export statement with default expansion: 
 
 	export SOURCE_VERSION=\${SOURCE_VERSION:-f5efc0615dbd0f64f718e142bad858b8e1cf59bb}
 
