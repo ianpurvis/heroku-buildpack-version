@@ -29,7 +29,7 @@ During your next deployment, the buildpack will generate the environment configu
 
 The script itself is simple, just a single export statement with default expansion: 
 
-	export SOURCE_VERSION=\${SOURCE_VERSION:-f5efc0615dbd0f64f718e142bad858b8e1cf59bb}
+	export SOURCE_VERSION=${SOURCE_VERSION:-f5efc0615dbd0f64f718e142bad858b8e1cf59bb}
 
 Note the expansion syntax ':-' ensures that any existing value is not overidden.
 
