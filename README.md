@@ -15,18 +15,15 @@ So, let's capture the information during slug compilation. Heroku provides the S
 
 ## Usage
 
-Install the buildpack to your app:
+First thing, add the buildpack to your app:
 
 	$ heroku buildpacks:add https://github.com/ianpurvis/heroku-buildpack-version
 
-If SOURCE_VERSION is f5efc0615dbd0f64f718e142bad858b8e1cf59bb, the buildpack will generate the following script:
+During your next deployment, the buildpack will generate the environment configuration script at `BUILD_DIR/.profile.d/source_version.sh`. The script is simple, just a single export statement with default expansion: 
 
-	~/.profile.d/source_version.sh
-	
-	# default SOURCE_VERSION to build source version
 	export SOURCE_VERSION=\${SOURCE_VERSION:-f5efc0615dbd0f64f718e142bad858b8e1cf59bb}
 
-Note the expansion syntax ensures that any existing value is not overidden.
+Note the expansion syntax ':-' ensures that any existing value is not overidden.
 
 In dev environments, scripting `git rev-parse` is still probably the most convenient way to get your current source version. For easy portablity, you can cascade the initialization:
 
