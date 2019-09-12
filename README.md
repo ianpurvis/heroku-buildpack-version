@@ -43,3 +43,9 @@ In dev environments, scripting `git rev-parse` is still probably the most conven
 - [Buildpack API](https://devcenter.heroku.com/articles/buildpack-api)
 - [SOURCE_VERSION](https://devcenter.heroku.com/changelog-items/630)
 - [Default Config Values](https://devcenter.heroku.com/articles/buildpack-api#default-config-values)
+
+
+## License
+The pack is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+[![https://purvisresearch.com](logo.svg)](https://purvisresearch.com)
